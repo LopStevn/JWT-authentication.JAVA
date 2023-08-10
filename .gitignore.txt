@@ -1,0 +1,22 @@
+# Ignorar archivos generados por NetBeans
+nbproject/
+build/
+dist/
+nbactions.xml
+nb-configuration.xml
+
+# Ignorar archivos de configuración de NetBeans
+nb-configuration.xml
+nbactions.xml
+
+# Ignorar archivos de respaldo
+*~
+*.bak
+
+# Ignorar archivos de configuración de IDE
+.idea/
+.vscode/
+
+# Ignorar archivos de configuración de Maven
+target/
+*.iml
