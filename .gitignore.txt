@@ -20,3 +20,7 @@ nbactions.xml
 # Ignorar archivos de configuración de Maven
 target/
 *.iml
+
+# Ignorar archivos private.xml en cualquier carpeta nbproject/private/
+**/nbproject/private/private.xml
+
