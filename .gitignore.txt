@@ -31,4 +31,7 @@ target/
 JWT-COOKIE.AccesoADatos/nbproject/private/*.xml
 JWT-COOKIE.EntidadesDeNegocio/nbproject/private/*.xml
 
+# Ignorar archivos private.xml en las carpetas nbproject/private/ de AccesoADatos y EntidadesDeNegocio
+/JWT-COOKIE.AccesoADatos/nbproject/private/private.xml
+/JWT-COOKIE.EntidadesDeNegocio/nbproject/private/private.xml
 
