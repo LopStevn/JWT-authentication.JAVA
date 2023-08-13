@@ -24,3 +24,6 @@ target/
 # Ignorar archivos private.xml en cualquier carpeta nbproject/private/
 **/nbproject/private/private.xml
 
+# Ignorar archivos private.xml en cualquier carpeta nbproject/private/
+* private.xml
+
