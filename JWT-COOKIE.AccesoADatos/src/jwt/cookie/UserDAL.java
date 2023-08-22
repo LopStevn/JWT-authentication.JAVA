@@ -5,6 +5,7 @@
 package jwt.cookie;
 import java.sql.*;
 import java.util.ArrayList;
+import jwt.cookie.User;
 /**
  *
  * @author MINEDUCYT
