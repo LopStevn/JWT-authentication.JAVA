@@ -16,6 +16,7 @@ public class User {
     private String userName;
     private String password;
     private String confirmarPassword_aux;
+    private int top_aux;
 
     public User() {
     }
@@ -84,7 +85,17 @@ public class User {
 
     public void setConfirmarPassword_aux(String confirmarPassword_aux) {
         this.confirmarPassword_aux = confirmarPassword_aux;
+        
     }
+
+    public int getTop_aux() {
+        return top_aux;
+    }
+
+    public void setTop_aux(int top_aux) {
+        this.top_aux = top_aux;
+    }
+    
     
     
 }
