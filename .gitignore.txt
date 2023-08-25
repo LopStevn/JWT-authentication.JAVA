@@ -35,3 +35,11 @@ JWT-COOKIE.EntidadesDeNegocio/nbproject/private/*.xml
 /JWT-COOKIE.AccesoADatos/nbproject/private/private.xml
 /JWT-COOKIE.EntidadesDeNegocio/nbproject/private/private.xml
 
+# Ignorar las properties del entorno de desarrollo de los integrantes
+/JWT-COOKIE.AppWeb/nbproject/private/private.properties
+/JWT-COOKIE.AccesoADatos/nbproject/private/private.properties
+/JWT-COOKIE.AccesoADatos/nbproject/private/config.properties
+/JWT-COOKIE.EntidadesDeNegocio/nbproject/private/private.properties
+
+
+

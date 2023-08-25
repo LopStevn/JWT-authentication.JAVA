@@ -1,9 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="jwt.cookie.appweb.utils.*"%>
-<% if (SessionUser.isAuth(request) == false) {
-         response.sendRedirect("Usuario?accion=login");
-    }
-%>
 <!DOCTYPE html>
 <html>
     <head>        
@@ -16,8 +11,8 @@
         <main class="container"> 
             <div class="row">
                 <div class="col l12 s12">
-                    <h1>Bienvenidos</h1> 
-                    <span>Autenticacion por JWT-COOKIE Y GOOGLE</span> 
+                    <h1>AUTENTICACION POR JWT Y GOOGLE</h1> 
+                    <span>Este sistema permite autenticacion por JasonWebTooken</span> 
                 </div>
             </div>            
         </main>

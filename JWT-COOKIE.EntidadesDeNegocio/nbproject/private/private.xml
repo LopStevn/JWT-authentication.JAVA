@@ -3,8 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="JWT.Authentication.Java">
-            <file>file:/C:/Users/MINEDUCYT/Documents/NetBeansProjects/JWT-authentication.JAVA/JWT-COOKIE.AccesoADatos/src/jwt/cookie/ComunDB.java</file>
-            <file>file:/C:/Users/MINEDUCYT/Documents/NetBeansProjects/JWT-authentication.JAVA/JWT-COOKIE.AccesoADatos/src/jwt/cookie/UserDAL.java</file>
+            <file>file:/C:/Users/MINEDUCYT/Documents/NetBeansProjects/JWT-authentication.JAVA/JWT-COOKIE.EntidadesDeNegocio/src/jwt/cookie/User.java</file>
         </group>
     </open-files>
 </project-private>
