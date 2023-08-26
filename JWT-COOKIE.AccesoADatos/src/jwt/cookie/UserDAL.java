@@ -25,7 +25,7 @@ public class UserDAL {
             // Agregar el TOP a la consulta SELECT si el gestor de base de datos es SQL SERVER y "getTop_aux" es mayor a cero
             sql += "TOP " + pUser.getTop_aux() + " ";
         }
-        sql += (obtenerCampos() + " FROM Users r"); // Agregar los campos de la tabla de Rol mas el FROM a la tabla Rol con su alias "r"
+        sql += (obtenerCampos() + " FROM [Users] r"); // Agregar los campos de la tabla de Rol mas el FROM a la tabla Rol con su alias "r"
         return sql;
     }
     
@@ -45,7 +45,7 @@ public class UserDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { // Obtener la conexion desde la clase ComunDB y encerrarla en try para cierre automatico
-            sql = "INSERT INTO Users(Name,LastName,Email,UserName,Password) VALUES(?,?,?,?,?)"; // Definir la consulta INSERT a la tabla de Rol utilizando el simbolo ? para enviar parametros
+            sql = "INSERT INTO [Users](Name,LastName,Email,UserName,Password) VALUES(?,?,?,?,?)"; // Definir la consulta INSERT a la tabla de Rol utilizando el simbolo ? para enviar parametros
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) { // Obtener el PreparedStatement desde la clase ComunDB
                 ps.setString(1, pUser.getName()); // Agregar el parametro a la consulta donde estan el simbolo ? #1  
                 ps.setString(2, pUser.getLastName()); 
@@ -69,7 +69,7 @@ public class UserDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { // Obtener la conexion desde la clase ComunDB y encerrarla en try para cierre automatico
-            sql = "UPDATE Users SET Name=?,LastName=?,Email=?,UserName=? WHERE Id=?"; // Definir la consulta UPDATE a la tabla de Rol utilizando el simbolo ? para enviar parametros
+            sql = "UPDATE [Users] SET Name=?,LastName=?,Email=?,UserName=? WHERE Id=?"; // Definir la consulta UPDATE a la tabla de Rol utilizando el simbolo ? para enviar parametros
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) { // Obtener el PreparedStatement desde la clase ComunDB
                 ps.setString(1, pUser.getName()); // Agregar el parametro a la consulta donde estan el simbolo ? #1  
                 ps.setString(2, pUser.getLastName());
@@ -93,7 +93,7 @@ public class UserDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { // Obtener la conexion desde la clase ComunDB y encerrarla en try para cierre automatico
-            sql = "DELETE FROM Users WHERE Id=?";  // Definir la consulta DELETE a la tabla de Rol utilizando el simbolo ? para enviar parametros
+            sql = "DELETE FROM [Users] WHERE Id=?";  // Definir la consulta DELETE a la tabla de Rol utilizando el simbolo ? para enviar parametros
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) { // Obtener el PreparedStatement desde la clase ComunDB
                 ps.setInt(1, pUser.getId()); // Agregar el parametro a la consulta donde estan el simbolo ? #1 
                 result = ps.executeUpdate();  // Ejecutar la consulta DELETE en la base de datos

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <jsp:include page="/Views/Shared/title.jsp" />
+        <jsp:include page="/Views/Shared/title.jsp"/>
         <title>Home</title>
 
     </head>
