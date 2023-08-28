@@ -115,20 +115,87 @@ public class UserServlet extends HttpServlet {
             // Enviar al jsp de error si hay un Exception
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
-
     }
-//    
-//    
-//
+    
+    private void requestObtenerPorId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            User usuario = obtenerUsuario(request); // Llenar la instancia de Usuario con los parámetros enviados en el request.
+            User usuario_result = UserDAL.obtenerPorId(usuario); // Obtener desde la capa de acceso a datos el usuario por Id.
+            if (usuario_result.getId() > 0) { // Si el Id es mayor a cero.
+                // Enviar el atributo usuario con el valor de los datos del usuario de nuestra base de datos a un jsp
+                request.setAttribute("usuario", usuario_result);
+            } else {
+                // Enviar al jsp de error el siguiente mensaje. El Id: ? no existe en la tabla de Usuario
+                Utilidad.enviarError("El Id:" + usuario_result.getId() + " no existe en la tabla de Usuario", request, response);
+            }
+        } catch (Exception ex) {
+            // enviar al jsp de error si hay un Exception
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    private void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Enviar el usuario al jsp de edit que se obtiene por Id
+        requestObtenerPorId(request, response);
+        // Direccionar al jsp edit de Usuario
+        request.getRequestDispatcher("Views/User/edit.jsp").forward(request, response);
+    }
+    
+    
+    private void doPostRequestEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            User usuario = obtenerUsuario(request); // Llenar la instancia de Usuario con los parámetros enviados en el request.
+            // Enviar los datos de Usuario a la capa de accesoa a datos para modificar el registro.
+            int result = UserDAL.modificar(usuario);
+            if (result != 0) { // Si el result es diferente a cero significa que los datos fueron modificado correctamente.
+                // Enviar el atributo accion con el valor index al jsp de index.
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response); // Ir al metodo doGetRequestIndex para que nos direcciones al jsp index.
+            } else {
+                // Enviar al jsp de error el siguiente mensaje. No se logro actualizar el registro.
+                Utilidad.enviarError("No se logro actualizar el registro", request, response);
+            }
+        } catch (Exception ex) {
+            // Enviar al jsp de error si hay un Exception
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    private void doGetRequestDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Enviar el usuario al jsp de details que se obtiene por Id.
+        requestObtenerPorId(request, response);
+        // Direccionar al jsp details de Usuario.
+        request.getRequestDispatcher("Views/User/details.jsp").forward(request, response);
+    }
+    
+    private void doGetRequestDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Enviar el usuario al jsp de delete que se obtiene por Id.
+        requestObtenerPorId(request, response);
+        // Direccionar al jsp delete de Usuario.
+        request.getRequestDispatcher("Views/User/delete.jsp").forward(request, response);
+    }
+    
+    private void doPostRequestDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            User usuario = obtenerUsuario(request); // Llenar la instancia de Usuario con los parámetros enviados en el request.
+            // Enviar los datos de Usuario a la capa de accesoa a datos para que elimine el registro.
+            int result = UserDAL.eliminar(usuario);
+            if (result != 0) { // Si el result es diferente a cero significa que los datos fueron eliminados correctamente.
+                // Enviar el atributo accion con el valor index al jsp de index.
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);  // Ir al método doGetRequestIndex para que nos direccione al jsp index.
+            } else {
+                // Enviar al jsp de error el siguiente mensaje. No se logro eliminar el registro.
+                Utilidad.enviarError("No se logro eliminar el registro", request, response);
+            }
+        } catch (Exception ex) {
+            // Enviar al jsp de error si hay un Exception.
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -157,17 +224,17 @@ public class UserServlet extends HttpServlet {
                     case "edit":
                         // Enviar el atributo accion al jsp de edit.
                         request.setAttribute("accion", accion);
-                        //doGetRequestEdit(request, response); // Ir al método doGetRequestEdit.
+                        doGetRequestEdit(request, response); // Ir al método doGetRequestEdit.
                         break;
                     case "delete":
                         // Enviar el atributo accion al jsp de delete.
                         request.setAttribute("accion", accion);
-                        //doGetRequestDelete(request, response); // Ir al método doGetRequestDelete.
+                        doGetRequestDelete(request, response); // Ir al método doGetRequestDelete.
                         break;
                     case "details":
                         // Enviar el atributo accion al jsp de details.
                         request.setAttribute("accion", accion);
-                        //doGetRequestDetails(request, response); // Ir al método doGetRequestDetails.
+                        doGetRequestDetails(request, response); // Ir al método doGetRequestDetails.
                         break;
                     case "cambiarpass":
                         // Enviar el atributo accion al jsp de cambiarPassword.
@@ -187,11 +254,6 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         // Obtener el parámetro accion del request
         String accion = Utilidad.getParameter(request, "accion", "index");
-//        if (accion.equals("login")) { // Si accion es igual a login 
-//            // Enviar el atributo accion al jsp de login.
-//            request.setAttribute("accion", accion);
-//            //doPostRequestLogin(request, response);  // Ir al método doGetRequestLogin.
-//        } else {
             // Utilizar el método authorize de la clase SessionUser para validar que solo usuario con permiso
             // puedan acceder al servlet de Usuario. Todo el codigo que este dentro  expresion Lambda, se ejecutara si el usuario tiene permitido
             // acceder a este Servlet 
@@ -210,12 +272,12 @@ public class UserServlet extends HttpServlet {
                     case "edit":
                         // Enviar el atributo accion al jsp de edit.
                         request.setAttribute("accion", accion);
-                        //doPostRequestEdit(request, response);  // Ir al metodo doPostRequestEdit.
+                        doPostRequestEdit(request, response);  // Ir al metodo doPostRequestEdit.
                         break;
                     case "delete":
                         // Enviar el atributo accion al jsp de delete.
                         request.setAttribute("accion", accion);
-                        //doPostRequestDelete(request, response);  // Ir al metodo doPostRequestDelete.
+                        doPostRequestDelete(request, response);  // Ir al metodo doPostRequestDelete.
                         break;
                     case "cambiarpass":
                         request.setAttribute("accion", accion);
